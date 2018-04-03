@@ -1,17 +1,20 @@
 package main
 
 import (
-    nl80211 "github.com/mdlayher/wifi"
+    "fmt"
+    wifi "github.com/mdlayher/wifi"
 )
 
 func main() {
-    var c , err = nl80211.New()
 
-    if err != nil {
-        // print error
-        return 
+    var c, _ = wifi.New()
+    defer c.Close()
+
+    ifis, _ := c.Interfaces()
+    for _, ifi := range ifis {
+        fmt.Printf("%s\n", ifi.Name, )
     }
-    c.Close()
+
     return
 }
 
